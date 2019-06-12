@@ -14,16 +14,20 @@ public class particleAttractorMove : MonoBehaviour {
 		}
 	}
 	void Update () {
-		m_Particles = new ParticleSystem.Particle[ps.main.maxParticles];
-		numParticlesAlive = ps.GetParticles(m_Particles);
-		float step = speed * Time.deltaTime;
-		for (int i = 0; i < numParticlesAlive; i++) {
-			m_Particles[i].position = Vector3.MoveTowards(m_Particles[i].position, target.position, step);
-            if(m_Particles[i].position == target.position)
+        if (target != null)
+        {
+            m_Particles = new ParticleSystem.Particle[ps.main.maxParticles];
+            numParticlesAlive = ps.GetParticles(m_Particles);
+            float step = speed * Time.deltaTime;
+            for (int i = 0; i < numParticlesAlive; i++)
             {
-                m_Particles[i].remainingLifetime = 0f;
+                m_Particles[i].position = Vector3.MoveTowards(m_Particles[i].position, target.position, step);
+                if (m_Particles[i].position == target.position)
+                {
+                    m_Particles[i].remainingLifetime = 0f;
+                }
             }
-		}
-		ps.SetParticles(m_Particles, numParticlesAlive);
+            ps.SetParticles(m_Particles, numParticlesAlive);
+        }
 	}
 }

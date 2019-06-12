@@ -15,6 +15,8 @@ public class StaffScript : LightSource
 
     private Camera camera;
 
+    public Animator staffAnimation;
+
     private new void Start()
     {
         base.Start();
@@ -31,24 +33,24 @@ public class StaffScript : LightSource
     {
         if (Input.GetMouseButtonDown(transferToLightButton))
         {
+            staffAnimation.SetBool("isUsingStaff", true);
             ShootRay("TransferLightTo");
         } else if (Input.GetMouseButtonDown(transferFromLightButton))
         {
+            staffAnimation.SetBool("isUsingStaff", true);
             ShootRay("TransferLightFrom");
+        } else if(Input.GetMouseButtonUp(transferFromLightButton) || Input.GetMouseButtonUp(transferToLightButton))
+        {
+            staffAnimation.SetBool("isUsingStaff", false);
         }
 
     }
 
     private void ShootRay(string methodName)
-    {
-
-        Debug.Log("shot ray");
-        
+    {        
         //Shoots a raycast from the camera's position and gives back name of object
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, interactableRange))
         {
-            Debug.DrawLine(camera.transform.position, (camera.transform.forward.normalized*interactableRange) + camera.transform.position, Color.red, 10f);
-            Debug.Log(hit.transform.tag);
             if (hit.transform.tag != null)
             {
                 if (hit.transform.CompareTag("Interactable") && hit.transform.gameObject.GetComponent<LightSource>() != null)
@@ -92,7 +94,6 @@ public class StaffScript : LightSource
         //Sees if we can insert light into other object and proceeds to do so if stone isn't full yet
         if (otherLightSource.intensity < maxLightThreshold)
         {
-            Debug.Log("yeet");
             float tempIntensitiesAddUp = otherLightSource.intensity + intensity;
             
 
@@ -153,6 +154,7 @@ public class StaffScript : LightSource
                 ParticleSystem tempParticles = Instantiate(transferParticles, transform.position, Quaternion.LookRotation(Vector3.forward));
                 tempParticles.GetComponent<particleAttractorMove>().target = otherObject.transform;
                 tempParticles.Play();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.suckLight);
                 for (int i = 0; i < loopValue; i++)
                 {
                     intensity--;
@@ -169,6 +171,7 @@ public class StaffScript : LightSource
                         break;
                     }
                 }
+                AudioManager.Instance.StopSound(AudioManager.Instance.suckLight);
                 tempParticles.Stop();
                 break;
 
@@ -176,6 +179,7 @@ public class StaffScript : LightSource
                 tempParticles = Instantiate(transferParticles, hit.point, Quaternion.LookRotation(Vector3.back));
                 tempParticles.GetComponent<particleAttractorMove>().target = transform;
                 tempParticles.Play();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.suckLight);
                 for (int i = 0; i < loopValue; i++)
                 {
                     
@@ -193,6 +197,7 @@ public class StaffScript : LightSource
                         break;
                     }
                 }
+                AudioManager.Instance.StopSound(AudioManager.Instance.suckLight);
                 tempParticles.Stop();
                 break;
 

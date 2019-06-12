@@ -176,6 +176,7 @@ MonoBehaviour:
   interactableRange: 10
   transferParticles: {fileID: 7106692586875725669, guid: 9eee0e26a41f74342ae3f57fc1c3ec3b,
     type: 3}
+  staffAnimation: {fileID: 2952344015645313940}
 --- !u!135 &2901292757375646574
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7706189974897502020}
+  - component: {fileID: 2952344015645313940}
   m_Layer: 0
   m_Name: MageStaff1
   m_TagString: Untagged
@@ -221,6 +223,25 @@ Transform:
   m_Father: {fileID: 6902488845882689308}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -171.16801, z: 0}
+--- !u!95 &2952344015645313940
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677355191272461655}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2488120b1ca8984399d6c623a1b1ca7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6902488845882268476
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +545,8 @@ GameObject:
   - component: {fileID: 6902488845876626748}
   - component: {fileID: 6902488845872745338}
   - component: {fileID: 6902488846040714485}
-  m_Layer: 0
+  - component: {fileID: 4594962508846267198}
+  m_Layer: 8
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -623,7 +645,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 1
   dithering: 0
   stopNaNs: 0
   physicalParameters:
@@ -697,3 +719,20 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &4594962508846267198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902488845882268478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7b2c24c1062fe41b18a512b56e7a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lmbShown: 0
+  rmbShown: 0
+  textActivated: 0
+  lmbText: {fileID: 0}
+  rmbText: {fileID: 0}
