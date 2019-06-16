@@ -47,7 +47,8 @@ public class SequencePuzzle : MonoBehaviour
     {
         if (currentSequence.Length == goodSequence.Length)
         {
-            if (currentSequence == goodSequence)
+
+            if (currentSequence == goodSequence && puzzleElements[0].intensity >= lightThresholds[0] || goodSequence.Length > 3)
             {
                 StartCoroutine(OpenDoor());
             } else

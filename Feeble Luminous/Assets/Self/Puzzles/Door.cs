@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
 
     public void GiveLightToStones()
     {
-        Color final = Color.white * Mathf.GammaToLinearSpace(intensity / 8);
+        Color final = Color.white * Mathf.GammaToLinearSpace(intensity / 16);
         for (int i = 0; i < stones.Length; i++)
         {
             stones[i].material.SetColor("_EmissiveColor", final);
